@@ -23,6 +23,12 @@ app.get('/', async (req, res) => {
   }
 });
 
+const trajetsRouter = require('./routes/trajets');
+app.use('/trajets', trajetsRouter);
+
+const lieuxRouter = require('./routes/lieux');
+app.use('/lieux', lieuxRouter);
+
 app.listen(PORT, () => {
   console.log(`Serveur backend démarré sur le port ${PORT}`);
 });

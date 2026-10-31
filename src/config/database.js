@@ -1,5 +1,7 @@
-const { Pool } = require('pg');
 require('dotenv').config();
+
+const { Pool, types } = require('pg');
+types.setTypeParser(1082, (val) => val); // 1082 = type DATE : garder le texte tel quel
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
