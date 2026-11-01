@@ -19,3 +19,4 @@ coverage/
 # OS and editor files
 .DS_Store
 .vscode/
+sql/

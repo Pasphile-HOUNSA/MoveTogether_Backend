@@ -13,9 +13,9 @@ app.use(express.json());
 app.get('/', async (req, res) => {
   try {
     const result = await db.query('SELECT NOW()');
-    res.json({ 
-      message: "Bienvenue sur l'API de MoveTogether !", 
-      dbTime: result.rows[0].now 
+    res.json({
+      message: "Bienvenue sur l'API de MoveTogether !",
+      dbTime: result.rows[0].now
     });
   } catch (err) {
     console.error(err);
@@ -28,6 +28,9 @@ app.use('/trajets', trajetsRouter);
 
 const lieuxRouter = require('./routes/lieux');
 app.use('/lieux', lieuxRouter);
+
+const recurrentsRouter = require('./routes/recurrents');
+app.use('/recurrents', recurrentsRouter);
 
 app.listen(PORT, () => {
   console.log(`Serveur backend démarré sur le port ${PORT}`);
