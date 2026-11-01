@@ -1,5 +1,6 @@
 const express = require('express');
 const db = require('../config/database');
+const { verifierAlertes } = require('../services/alertes');
 
 const router = express.Router();
 
@@ -25,6 +26,8 @@ router.post('/', async (req, res) => {
       [idcar, datedepart, heuredepart, price, placesdispo, statut || 'en attente',
        lieu_depart, lieu_arrivee, idzone_depart || null, idzone_arrivee || null]
     );
+
+    verifierAlertes(rows[0]).catch(err => console.error('Erreur alertes :', err));
     res.status(201).json(rows[0]);
   } catch (err) {
     console.error(err);

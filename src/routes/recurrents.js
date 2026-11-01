@@ -1,5 +1,6 @@
 const express = require('express');
 const db = require('../config/database');
+const { verifierAlertes } = require('../services/alertes');
 
 const router = express.Router();
 
@@ -70,6 +71,13 @@ router.post('/', async (req, res) => {
     }
 
     await client.query('COMMIT');
+
+    // Une seule vérification par série, avec la première date (pas 9 notifications)
+    verifierAlertes({
+    idtrajet: null, lieu_depart, lieu_arrivee,
+    datedepart: dates[0], heuredepart
+    }).catch(err => console.error('Erreur alertes :', err));
+
     res.status(201).json({ serie: serie.rows[0], occurrences_creees: dates.length });
   } catch (err) {
     await client.query('ROLLBACK');

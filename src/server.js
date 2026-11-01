@@ -32,6 +32,9 @@ app.use('/lieux', lieuxRouter);
 const recurrentsRouter = require('./routes/recurrents');
 app.use('/recurrents', recurrentsRouter);
 
+const alertesRouter = require('./routes/alertes');
+app.use('/alertes', alertesRouter);
+
 app.listen(PORT, () => {
   console.log(`Serveur backend démarré sur le port ${PORT}`);
 });
